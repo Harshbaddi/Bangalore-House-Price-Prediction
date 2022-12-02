@@ -1,0 +1,220 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+
+    <style>
+          body {
+        margin: 0;
+        padding: 0;
+        min-height: 100vh;
+        background-color: #050f2c;
+        font-family: "Inter", sans-serif;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+
+       body::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+       background: linear-gradient(#3EDBF0,#04009A);
+        clip-path: circle(55% at 70% 0%);
+      }
+
+      body::after {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: linear-gradient(#77ACF1, #77ACF1);
+        clip-path: circle(20% at 10% 90%);
+      }
+
+       .container {
+        position: relative;
+        max-width: 1200px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-wrap: wrap;
+        z-index: 1;
+      }
+
+      .card {
+        width: 300px;
+        height: 380px;
+        position: relative;
+        margin: 30px;
+        background: #ffffff;
+        border-top: 1px solid #eeeded70;
+        border-left: 1px solid #eeeded70;
+        border-radius: 50px;
+        box-shadow: inset -5px -5px 250px rgba(255, 255, 255, 0.02);
+        backdrop-filter: blur(30px);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+       
+      }
+
+      .card:hover {
+       top:2px;
+      }
+      .card-header{
+        padding-top: 10px;
+        padding-bottom: 0px;
+        padding-right: 0px;
+        padding-left: 0px;
+        border-bottom-width: 0px;
+      }
+
+
+
+
+
+    </style>
+    <title>House Price Prediction</title>
+  </head>
+  <body class="bg-white" >
+    <img src="static/pes-logo.jpg" 
+     width="220 " 
+     height="120" style="position:absolute;top:0;left:0;"/>
+
+
+    <div class="container">
+      <div class="row">
+        <div class="card" style="width:100%; height:100%; margin-top: 100px" >
+          <div class="card-header" style="text-align:center">
+              <h1><b style="color:gray;">Bengaluru  House  Price  Prediction</b></h1>
+          </div>
+            <br>
+            <br>
+
+              <h6><b style="color:gray;">Fill in the details below to predict the price for a house in Bengaluru!</b></h6>
+
+              <div class="card-body">
+                 <form method="post" accept-charset="utf-8">
+
+                   <div class="row">
+
+                     <div class="col-md-6 form-group" style="text-align: center " >
+                       <label ><b style="color:gray;">Select the location:</b></label>
+                       <select style="border-radius:20px" class="selectpicker form-control" id="location" name="location"  required="1">
+                          {% for location in locations %}
+                            <option value="{{ location }}">{{ location }}</option>
+                          {% endfor %}
+                       </select>
+                     </div>
+
+                     <div class="col-md-6 form-group" style="text-align: center" >
+                       <label><b style="color:gray;" >Enter BHK:</b></label>
+                       <input style="border-radius: 20px;" type="text" class="form-control" id="bhk" name="bhk" placeholder="Enter BHK">
+                     </div>
+
+                     <div class="col-md-6 form-group" style="text-align: center" >
+                       <label><b style="color:gray;">Enter the Number of Bathrooms:</b></label>
+                       <input style="border-radius: 20px;" type="text" class="form-control" id="bath" name="bath" placeholder="Enter Number of Bathrooms">
+                     </div>
+                     <div class="col-md-6 form-group" style="text-align: center" >
+                       <label><b style="color:gray;">Enter Square feet:</b></label>
+                       <input style="border-radius: 20px;" type="text" class="form-control" id="total_sqft" name="total_sqft" placeholder="Enter Square Feet">
+                     </div>
+                     <div class="col-md-6 form-group ">
+                      <button style="margin-right:10px; margin-top:30px; width: 200px; border-radius: 30px;" class="btn btn-primary btn-lg" onclick="send_data()">Github <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="currentColor" class="bi bi-github" viewBox="0 0 16 16">
+                        <path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.012 8.012 0 0 0 16 8c0-4.42-3.58-8-8-8z"/>
+                        </svg></button>
+                    </div>
+                     <div class="col-md-6 form-group ">
+                       <button style="margin-left:44px; margin-top:30px; width: 200px; border-radius: 30px;" class="btn btn-primary btn-lg" onclick="send_data()">Predict Price</button>
+                     </div>
+
+
+
+                   </div>
+
+
+                 </form>
+                <br>
+
+
+
+                <div class="col-md-6" style="text-align: left">
+                  <h3>Harsh Baddi (PES1UG19ME076) </span></h3>
+                  <h3>Neeraj (PES1UG19ME076) </span></h3>
+                  <h3>Ravichandra (PES1UG19ME076) </span></h3>
+                  <h3>Ganesh  (PES1UG19ME076) </span></h3>
+                </div>
+
+                <div class="col-md-6 offset-md-6" style="text-align: top">
+                  <h3><span id="prediction"> </span></h3>
+                </div>
+
+
+
+              </div>
+
+            <br>
+
+
+            <br>
+
+            </div>
+    </div>
+
+   <script>
+
+            function form_handler(event)
+            {
+                   event.preventDefault();
+            }
+            function send_data()
+            {
+                    document.querySelector('form').addEventListener("submit",form_handler);
+
+                    var fd=new FormData(document.querySelector('form'));
+
+                    var xhr= new XMLHttpRequest();
+
+                    xhr.open('POST','/predict',true);
+
+                    document.getElementById("prediction").innerHTML = "Wait Predicting Price...!";
+                    xhr.onreadystatechange = function(){
+                        if(xhr.readyState == XMLHttpRequest.DONE){
+                            document.getElementById('prediction').innerHTML="Estimated Price is : ₹ "+xhr.responseText;
+                        }
+                    };
+
+                    xhr.onload = function(){};
+                    xhr.send(fd);
+
+            }
+   </script>
+   </div>
+
+        </div>
+
+      </div>
+
+    </div>
+
+
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+  <br>
+  </body>
+</html>
